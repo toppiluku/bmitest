@@ -40,16 +40,15 @@ def vc(text):
             st.error("ไม่พบลิงก์ไฟล์เสียงใน response")
     except Exception as e:
         st.error(f"เกิดข้อผิดพลาด: {e}")
-
 if st.button('Calculate'):
-    # ✅ Spinner + Progress
+st.snow()
     with st.spinner("กำลังคำนวณ BMI..."):
         prog = st.progress(0)
         for i in range(0, 101, 5):
-            time.sleep(0.02)        # แค่ทำให้เห็น progress
+            time.sleep(0.02)
             prog.progress(i)
 
-    if (height > 0) and (weight > 0):          # ✅ เช็คค่าให้ถูกต้อง
+    if (height > 0) and (weight > 0):
         bmi = weight / ((height / 100) ** 2)
         st.write(f"BMI is {bmi:.3f}")
 
@@ -69,13 +68,11 @@ if st.button('Calculate'):
             st.success('Normal')
             res.image('nm.png')
             textsp = "ปกติแล้ว ไม่ต้องทำไร"
-            st.snow()                # 🎄 แถมเอฟเฟกต์หิมะตอนปกติ
         else:
             st.info('Thin')
             res.image('th.png')
             textsp = "คุณผอมแล้วนะ"
 
-        st.balloons()               # 🎈 ปล่อยลูกโป่งหลังคำนวณเสร็จ
         vc(textsp)
     else:
-        st.error('Invalid: โปรดกรอกค่า > 0 ทั้งน้ำหนักและส่วนสูง')
+        st.error('Invalid')
