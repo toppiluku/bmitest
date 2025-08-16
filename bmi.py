@@ -56,7 +56,7 @@ def vc(text):
         st.error(f"เกิดข้อผิดพลาด: {e}")
 
 if st.button('Calculate'):
-    if height > 0:
+    if height and weight > 0:
         bmi = weight / ((height / 100) ** 2)
         st.write(f"BMI is {bmi:.2f}")
         if bmi > 30:
