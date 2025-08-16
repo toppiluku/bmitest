@@ -1,5 +1,6 @@
 import streamlit as st
 import requests
+import time                          # ✅ ใช้กับ progress demo
 from pathlib import Path
 
 st.set_page_config(page_title='BODY MASS INDEX')
@@ -9,59 +10,49 @@ resx = st.empty()
 resx.image('bmi_chart.png')
 st.header('Input Your Weight and Height in Box!')
 
-weight = st.number_input('Weight (in Kg.)')
-height = st.number_input('Height (in Cm.)')
+weight = st.number_input('Weight (in Kg.)', min_value=0.0, step=0.1)
+height = st.number_input('Height (in Cm.)', min_value=0.0, step=0.1)
 res = st.empty()
 
 API_URL = "https://api-voice.botnoi.ai/openapi/v1/generate_audio"
 API_TOKEN = "UrOxuYDAufKNES4N91COk75zwt7dCddH"
 SPEAKER_ID = "1"
+
 def vc(text):
     payload = {
-        "text": text,
-        "speaker": SPEAKER_ID,
-        "volume": 1,
-        "speed": 1,
-        "type_media": "mp3",
-        "save_file": "true",
-        "language": "th",
-        "page": "user"
+        "text": text, "speaker": SPEAKER_ID, "volume": 1, "speed": 1,
+        "type_media": "mp3", "save_file": "true", "language": "th", "page": "user"
     }
     headers = {
-        "accept": "application/json",
-        "Content-Type": "application/json",
+        "accept": "application/json", "Content-Type": "application/json",
         "botnoi-token": API_TOKEN
     }
-
     try:
         res = requests.post(API_URL, json=payload, headers=headers, timeout=30)
         res.raise_for_status()
         data = res.json()
-
-        audio_url = (
-            data.get("url")
-            or data.get("audio_url")
-            or (data.get("data") or {}).get("url")
-        )
-
+        audio_url = data.get("url") or data.get("audio_url") or (data.get("data") or {}).get("url")
         if audio_url:
             audio_bytes = requests.get(audio_url, timeout=30).content
-            out_path = Path("botnoi_voice.mp3")
-            out_path.write_bytes(audio_bytes)
+            Path("botnoi_voice.mp3").write_bytes(audio_bytes)
             st.audio(audio_bytes, format="audio/mp3")
         else:
             st.error("ไม่พบลิงก์ไฟล์เสียงใน response")
-
     except Exception as e:
         st.error(f"เกิดข้อผิดพลาด: {e}")
 
-st.balloons()
 if st.button('Calculate'):
-    st.progress()
-    st.spinner()
-    if height and weight > 0:
+    # ✅ Spinner + Progress
+    with st.spinner("กำลังคำนวณ BMI..."):
+        prog = st.progress(0)
+        for i in range(0, 101, 5):
+            time.sleep(0.02)        # แค่ทำให้เห็น progress
+            prog.progress(i)
+
+    if (height > 0) and (weight > 0):          # ✅ เช็คค่าให้ถูกต้อง
         bmi = weight / ((height / 100) ** 2)
         st.write(f"BMI is {bmi:.3f}")
+
         if bmi >= 40.00:
             st.error('Fat Stage 3')
             res.image('obesity.png')
@@ -70,18 +61,21 @@ if st.button('Calculate'):
             st.warning('Fat Stage 2')
             res.image('obesity2.png')
             textsp = "อ้วนแล้วนะ"
-        elif bmi >= 25.00 :
+        elif bmi >= 25.00:
             st.success('Fat Stage 1')
             res.image('obesity3.png')
             textsp = "เริ่มอ้วนแล้วนะ"
-        elif bmi >= 18.50 :
+        elif bmi >= 18.50:
             st.success('Normal')
             res.image('nm.png')
             textsp = "ปกติแล้ว ไม่ต้องทำไร"
+            st.snow()                # 🎄 แถมเอฟเฟกต์หิมะตอนปกติ
         else:
             st.info('Thin')
             res.image('th.png')
             textsp = "คุณผอมแล้วนะ"
+
+        st.balloons()               # 🎈 ปล่อยลูกโป่งหลังคำนวณเสร็จ
         vc(textsp)
     else:
-        st.error('Invalid')
+        st.error('Invalid: โปรดกรอกค่า > 0 ทั้งน้ำหนักและส่วนสูง')
