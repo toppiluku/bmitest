@@ -44,7 +44,7 @@ if st.button('Calculate'):
     with st.spinner("กำลังคำนวณ BMI..."):
         prog = st.progress(0)
         for i in range(0, 105, 5):
-            time.sleep(0.07)
+            time.sleep(0.04)
             prog.progress(i)
 
     if (height > 0) and (weight > 0):
