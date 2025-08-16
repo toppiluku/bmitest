@@ -58,7 +58,7 @@ def vc(text):
 if st.button('Calculate'):
     if height and weight > 0:
         bmi = weight / ((height / 100) ** 2)
-        st.write(f"BMI is {bmi:.2f}")
+        st.write(f"BMI is {bmi:.3f}")
         if bmi > 30:
             st.error('Fat Stage 3')
             res.image('sf.png')
@@ -66,7 +66,7 @@ if st.button('Calculate'):
         elif bmi >= 23:
             st.warning('Fat Stage 1-2')
             res.image('cf.png')
-            textsp = "เริ่มๆอ้วนแล้วนะ"
+            textsp = "เริ่มอ้วนแล้วนะ"
         elif bmi >= 18.5:
             st.success('Normal')
             res.image('nm.png')
@@ -76,3 +76,5 @@ if st.button('Calculate'):
             res.image('th.png')
             textsp = "คุณผอมแล้วนะ"
         vc(textsp)
+    else:
+        st.write(f"Invalid")
