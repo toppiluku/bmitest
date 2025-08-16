@@ -43,7 +43,7 @@ def vc(text):
 if st.button('Calculate'):
     with st.spinner("กำลังคำนวณ BMI..."):
         prog = st.progress(0)
-        for i in range(0, 20, 5):
+        for i in range(0, 102, 5):
             time.sleep(0.1)
             prog.progress(i)
 
