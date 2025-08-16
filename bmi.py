@@ -4,7 +4,7 @@ from pathlib import Path
 
 st.set_page_config(page_title='BODY MASS INDEX')
 
-st.title('BMI Calculator :)')
+st.title('BMI Calculator')
 resx = st.empty()
 resx.image('bmi_chart.png')
 st.header('Input Your Weight and Height in Box!')
