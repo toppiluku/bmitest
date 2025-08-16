@@ -55,8 +55,10 @@ def vc(text):
     except Exception as e:
         st.error(f"เกิดข้อผิดพลาด: {e}")
 
+st.balloons()
 if st.button('Calculate'):
-    st.balloons()
+    st.progress()
+    st.spinner()
     if height and weight > 0:
         bmi = weight / ((height / 100) ** 2)
         st.write(f"BMI is {bmi:.3f}")
