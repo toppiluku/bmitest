@@ -82,4 +82,5 @@ if st.button('Calculate'):
         vc(textsp)
     else:
         st.warning('ไม่เสือกสิครับ')
-        res.image('no.png')
+        resy = st.empty()
+        resy.image('no.png')
