@@ -59,15 +59,19 @@ if st.button('Calculate'):
     if height and weight > 0:
         bmi = weight / ((height / 100) ** 2)
         st.write(f"BMI is {bmi:.3f}")
-        if bmi > 30:
+        if bmi >= 40.00:
             st.error('Fat Stage 3')
-            res.image('sf.png')
-            textsp = "อ้วนแล้วๆๆๆ"
-        elif bmi >= 23:
-            st.warning('Fat Stage 1-2')
-            res.image('cf.png')
+            res.image('obesity.png')
+            textsp = "อ้วนมากกๆๆ"
+        elif bmi >= 30.00:
+            st.warning('Fat Stage 2')
+            res.image('obesity2.png')
+            textsp = "อ้วนแล้วนะ"
+        elif bmi >= 25.00 :
+            st.success('Fat Stage 1')
+            res.image('obesity3.png')
             textsp = "เริ่มอ้วนแล้วนะ"
-        elif bmi >= 18.5:
+        elif bmi >= 18.50 :
             st.success('Normal')
             res.image('nm.png')
             textsp = "ปกติแล้ว ไม่ต้องทำไร"
@@ -77,4 +81,5 @@ if st.button('Calculate'):
             textsp = "คุณผอมแล้วนะ"
         vc(textsp)
     else:
-        st.write(f"Invalid")
+        st.write(f"ไม่เสือกสิครับ")
+        res.image('no.png')
