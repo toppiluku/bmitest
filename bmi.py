@@ -81,6 +81,4 @@ if st.button('Calculate'):
             textsp = "คุณผอมแล้วนะ"
         vc(textsp)
     else:
-        st.warning('ไม่เสือกสิครับ')
-        resy = st.empty()
-        resy.image('no.png')
+        st.error('Invalid')
