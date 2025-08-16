@@ -62,7 +62,7 @@ if st.button('Calculate'):
         if bmi >= 40.00:
             st.error('Fat Stage 3')
             res.image('obesity.png')
-            textsp = "อ้วนมากกๆๆ"
+            textsp = "อ้วนมากๆๆ"
         elif bmi >= 30.00:
             st.warning('Fat Stage 2')
             res.image('obesity2.png')
