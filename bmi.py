@@ -41,7 +41,6 @@ def vc(text):
     except Exception as e:
         st.error(f"เกิดข้อผิดพลาด: {e}")
 if st.button('Calculate'):
-st.snow()
     with st.spinner("กำลังคำนวณ BMI..."):
         prog = st.progress(0)
         for i in range(0, 101, 5):
@@ -72,7 +71,6 @@ st.snow()
             st.info('Thin')
             res.image('th.png')
             textsp = "คุณผอมแล้วนะ"
-
         vc(textsp)
     else:
         st.error('Invalid')
