@@ -81,5 +81,5 @@ if st.button('Calculate'):
             textsp = "คุณผอมแล้วนะ"
         vc(textsp)
     else:
-        st.write(f"ไม่เสือกสิครับ")
+        st.warning('ไม่เสือกสิครับ')
         res.image('no.png')
