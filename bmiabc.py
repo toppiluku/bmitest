@@ -15,7 +15,8 @@ height = st.number_input('Height (in Cm.)', min_value=0.0, step=0.1)
 qs=f"โรคภัยที่น่ากังวลที่สุดของคนที่น้ำหนัก {weight} กก. และสูง {height} ซม.ตอบมาแค่โรคหลักอันเดียวเอาให้คำทุกคำที่ออกมาอยู้ใน 200 ตัวอักษรพอดีเอาที่สำคัญ"
 from openai import OpenAI
 
-client = OpenAI(api_key="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")
+client = OpenAI(api_key="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
+")
 
 response = client.chat.completions.create(
     model="gpt-4o-mini",  # หรือ gpt-4o / o1-mini / o1-preview
@@ -114,3 +115,4 @@ if st.button('Calculate'):
     else:
         st.error('Invalid')
         
+
