@@ -49,7 +49,7 @@ if st.button('Calculate'):
 
     if (height > 0) and (weight > 0):
         bmi = weight / ((height / 100) ** 2)
-        st.write(f"BMI is {bmi:.3f}")
+        st.write(f"BMI is {bmi:.2f}")
 
         if bmi >= 40.00:
             st.error('Fat Stage 3')
