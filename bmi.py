@@ -12,14 +12,14 @@ st.header('Input Your Weight and Height in Box!')
 
 weight = st.number_input('Weight (in Kg.)', min_value=0.0, step=0.1)
 height = st.number_input('Height (in Cm.)', min_value=0.0, step=0.1)
-string = st.text_input('Weight (in Kg.)')
+string = st.text_input('Text')
 res = st.empty()
 spider = st.empty()
 API_URL = "https://api-voice.botnoi.ai/openapi/v1/generate_audio"
 API_TOKEN = "UrOxuYDAufKNES4N91COk75zwt7dCddH"
 SPEAKER_ID = "1"
 
-def vc(string):
+def vc(text):
     payload = {
         "text": text, "speaker": SPEAKER_ID, "volume": 1, "speed": 1,
         "type_media": "mp3", "save_file": "true", "language": "th", "page": "user"
