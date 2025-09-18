@@ -12,6 +12,7 @@ st.header('Input Your Weight and Height in Box!')
 
 weight = st.number_input('Weight (in Kg.)', min_value=0.0, step=0.1)
 height = st.number_input('Height (in Cm.)', min_value=0.0, step=0.1)
+string = st.text_input('Weight (in Kg.)', min_value=0.0, step=0.1)
 qs=f"โรคภัยที่น่ากังวลที่สุดของคนที่น้ำหนัก {weight} กก. และสูง {height} ซม.ตอบมาแค่โรคหลักอันเดียวเอาให้คำทุกคำที่ออกมาอยู้ใน 200 ตัวอักษรพอดีเอาที่สำคัญ"
 res = st.empty()
 spider = st.empty()
@@ -96,6 +97,7 @@ if st.button('Calculate'):
             res.image('th.png')
             textsp = "คุณผอมแล้วนะ"
         vc(textsp)
+        vc(string)
     else:
         st.error('Invalid')
         
