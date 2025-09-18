@@ -13,18 +13,6 @@ st.header('Input Your Weight and Height in Box!')
 weight = st.number_input('Weight (in Kg.)', min_value=0.0, step=0.1)
 height = st.number_input('Height (in Cm.)', min_value=0.0, step=0.1)
 qs=f"โรคภัยที่น่ากังวลที่สุดของคนที่น้ำหนัก {weight} กก. และสูง {height} ซม.ตอบมาแค่โรคหลักอันเดียวเอาให้คำทุกคำที่ออกมาอยู้ใน 200 ตัวอักษรพอดีเอาที่สำคัญ"
-from openai import OpenAI
-
-client = OpenAI(api_key="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")
-
-response = client.chat.completions.create(
-    model="gpt-4o-mini",  # หรือ gpt-4o / o1-mini / o1-preview
-    messages=[
-        {"role": "system", "content": "You are a helpful assistant."},
-        {"role": "user", "content": qs}
-    ],
-    max_tokens=200
-)
 res = st.empty()
 spider = st.empty()
 API_URL = "https://api-voice.botnoi.ai/openapi/v1/generate_audio"
@@ -108,9 +96,6 @@ if st.button('Calculate'):
             res.image('th.png')
             textsp = "คุณผอมแล้วนะ"
         vc(textsp)
-        set = response.choices[0].message.content
-        st.write(set)
-        gpt(set)
     else:
         st.error('Invalid')
         
