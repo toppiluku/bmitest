@@ -12,8 +12,7 @@ st.header('Input Your Weight and Height in Box!')
 
 weight = st.number_input('Weight (in Kg.)', min_value=0.0, step=0.1)
 height = st.number_input('Height (in Cm.)', min_value=0.0, step=0.1)
-string = st.text_input('Weight (in Kg.)', min_value=0.0, step=0.1)
-qs=f"โรคภัยที่น่ากังวลที่สุดของคนที่น้ำหนัก {weight} กก. และสูง {height} ซม.ตอบมาแค่โรคหลักอันเดียวเอาให้คำทุกคำที่ออกมาอยู้ใน 200 ตัวอักษรพอดีเอาที่สำคัญ"
+string = st.text_input('Weight (in Kg.)')
 res = st.empty()
 spider = st.empty()
 API_URL = "https://api-voice.botnoi.ai/openapi/v1/generate_audio"
@@ -42,29 +41,6 @@ def vc(string):
             st.error("ไม่พบลิงก์ไฟล์เสียงใน response")
     except Exception as e:
         st.error(f"เกิดข้อผิดพลาด: {e}")
-def gpt(set):
-    payload = {
-        "text": set, "speaker": SPEAKER_ID, "volume": 1, "speed": 1,
-        "type_media": "mp3", "save_file": "true", "language": "th", "page": "user"
-    }
-    headers = {
-        "accept": "application/json", "Content-Type": "application/json",
-        "botnoi-token": API_TOKEN
-    }
-    try:
-        res = requests.post(API_URL, json=payload, headers=headers, timeout=30)
-        res.raise_for_status()
-        data = res.json()
-        audio_url = data.get("url") or data.get("audio_url") or (data.get("data") or {}).get("url")
-        if audio_url:
-            audio_bytes = requests.get(audio_url, timeout=30).content
-            Path("botnoi_voice.mp3").write_bytes(audio_bytes)
-            st.audio(audio_bytes, format="audio/mp3")
-        else:
-            st.error("ไม่พบลิงก์ไฟล์เสียงใน response")
-    except Exception as e:
-        st.error(f"เกิดข้อผิดพลาด: {e}")
-
 if st.button('Calculate'):
     with st.spinner("กำลังคำนวณ BMI..."):
         prog = st.progress(0)
@@ -96,7 +72,6 @@ if st.button('Calculate'):
             st.info('Thin')
             res.image('th.png')
             textsp = "คุณผอมแล้วนะ"
-        vc(textsp)
         vc(string)
     else:
         st.error('Invalid')
