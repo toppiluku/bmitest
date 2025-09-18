@@ -70,7 +70,7 @@ if st.button('Calculate'):
             textsp = "ปกติแล้ว ไม่ต้องทำไร"
         else:
             st.info('Thin')
-            res.image('th.png')
+            res.image('win29.jpg')
             textsp = "คุณผอมแล้วนะ"
         vc(string)
     else:
