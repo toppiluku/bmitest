@@ -20,7 +20,7 @@ API_URL = "https://api-voice.botnoi.ai/openapi/v1/generate_audio"
 API_TOKEN = "UrOxuYDAufKNES4N91COk75zwt7dCddH"
 SPEAKER_ID = "1"
 
-def vc(text):
+def vc(string):
     payload = {
         "text": text, "speaker": SPEAKER_ID, "volume": 1, "speed": 1,
         "type_media": "mp3", "save_file": "true", "language": "th", "page": "user"
